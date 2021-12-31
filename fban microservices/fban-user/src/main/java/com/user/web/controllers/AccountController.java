@@ -26,7 +26,7 @@ public class AccountController {
 	public ResponseEntity<Account> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
-	
+		
 	@PostMapping(value = "/register")
 	public ResponseEntity<Account> create(@Valid @RequestBody AccountRequest accountRequest) {
 		return ResponseEntity.created(null).body(service.create(accountRequest));
