@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_clients")
+@Table(name = "tb_client")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client {
@@ -30,9 +30,6 @@ public class Client {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
-
-    @Column(nullable = false, unique = true)
-    private String email;
     
     @Column(name = "cellphone")
     private String cellphone;
