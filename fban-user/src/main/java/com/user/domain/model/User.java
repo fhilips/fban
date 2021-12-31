@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_user")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -51,5 +53,7 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "role_id")
 	)	
 	private Set<Role> role = new HashSet<>();
+    
+    
 
 }
