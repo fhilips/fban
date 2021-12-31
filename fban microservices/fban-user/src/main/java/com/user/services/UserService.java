@@ -1,4 +1,4 @@
-package com.user.domain.service;
+package com.user.services;
 
 import com.user.domain.model.User;
 

@@ -9,32 +9,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.user.domain.model.User;
-import com.user.services.UserService;
+import com.user.domain.model.UserDetails;
+import com.user.services.UserDetailsService;
+import com.user.web.dto.request.UserDetailsRequest;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "/usersDetails")
+public class UserDetailsController {
 			
 	@Autowired
-	private UserService service;
+	private UserDetailsService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id) {
+	public ResponseEntity<UserDetails> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
-	
-	@GetMapping(value = "/search")
-	public ResponseEntity<User> findByEmail(@RequestParam String email) {
-		return ResponseEntity.ok(service.findByEmail(email));
-	}
-	
-	@PostMapping(value = "/register")
-	public ResponseEntity<User> create(@Valid @RequestBody User user) {
-		return ResponseEntity.created(null).body(service.create(user));
+		
+	@PostMapping(value = "/create")
+	public ResponseEntity<UserDetails> create(@Valid @RequestBody UserDetailsRequest userDetailsRequest) {
+		return ResponseEntity.created(null).body(service.create(userDetailsRequest));
 	}
 	
 }

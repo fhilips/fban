@@ -1,4 +1,4 @@
-package com.user.domain.service.impl;
+package com.user.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.user.domain.model.User;
 import com.user.domain.repositories.UserRepository;
-import com.user.domain.service.UserService;
+import com.user.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,14 +28,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User create(User user) {
-		System.out.println(user.getPassword());
+		
 		User newUser = User.builder()
-			.username(user.getUsername())
-			.client(user.getClient())
-			.email(user.getEmail())
-			.password(passwordEncoder.encode(user.getPassword()))
-			.role(user.getRole())
-			.build();
+							.username(user.getUsername())			
+							.email(user.getEmail())
+							.password(passwordEncoder.encode(user.getPassword()))
+							.role(user.getRole())
+							.build();
 		
 		return repository.save(newUser);		
 	}	

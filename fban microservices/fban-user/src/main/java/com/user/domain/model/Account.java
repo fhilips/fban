@@ -24,8 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Account {
 	
-    @Id
-    @Column(name = "account_id")
+    @Id    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -43,6 +42,6 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client client;
+    private UserDetails client;
 
 }

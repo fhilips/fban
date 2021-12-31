@@ -3,6 +3,7 @@ package com.user.domain.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,8 +30,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 	
-    @Id
-    @Column(name = "user_id")
+    @Id   
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -43,9 +43,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private UserDetails userDetails;
     
     @ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
