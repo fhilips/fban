@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,8 +42,9 @@ public class Account {
     @Column(nullable = false, columnDefinition = "decimal(10, 2) default 0")
     private BigDecimal balance;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private UserDetails client;
+    @JoinColumn(name = "user_details_id")
+    private UserDetails user;
 
 }

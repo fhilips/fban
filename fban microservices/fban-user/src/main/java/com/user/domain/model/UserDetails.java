@@ -40,7 +40,7 @@ public class UserDetails {
     @MapsId
     private User user;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "user")
     private List<Account> accounts;
 
 }
