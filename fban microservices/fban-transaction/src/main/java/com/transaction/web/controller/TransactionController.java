@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.transaction.service.MessageResponse;
 import com.transaction.service.TransactionService;
 import com.transaction.service.impl.MessageResponseImpl;
+import com.transaction.web.dto.request.TransactionRequest;
 
 @RestController
 @RequestMapping(value = "/transaction")
@@ -20,21 +21,21 @@ public class TransactionController implements MessageResponse{
 	private TransactionService service;
 	
 	@PostMapping("deposit")
-    public ResponseEntity<MessageResponse> deposit(@RequestBody User user) {
+    public ResponseEntity<MessageResponse> deposit(@RequestBody TransactionRequest user) {
         service.deposit(user);
-        return ResponseEntity.created(null).body(createMessageResponse(1l,"Desposito feito com sucesso"));
+        return ResponseEntity.created(null).body(createMessageResponse(1l, "Desposito feito com sucesso"));
     }
 	
 	@PostMapping("withdraw")
-    public ResponseEntity<MessageResponse> withdraw(@RequestBody User user) {
+    public ResponseEntity<MessageResponse> withdraw(@RequestBody TransactionRequest user) {
 		service.withdraw(user);
-        return ResponseEntity.created(null).body(createMessageResponse(1l,"Retirada feita com sucesso"));
+        return ResponseEntity.created(null).body(createMessageResponse(1l, "Retirada feita com sucesso"));
     }
 	
 	@PostMapping("transfer")
-    public ResponseEntity<MessageResponse> tranfer(@RequestBody User user) {
+    public ResponseEntity<MessageResponse> tranfer(@RequestBody TransactionRequest user) {
 		service.transfer(user);
-		return ResponseEntity.created(null).body(createMessageResponse(1l,"Tranferencia criada com sucesso"));
+		return ResponseEntity.created(null).body(createMessageResponse(1l, "Tranferencia criada com sucesso"));
     }
 
 	@Override

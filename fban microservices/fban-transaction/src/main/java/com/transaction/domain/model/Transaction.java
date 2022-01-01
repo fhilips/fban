@@ -1,7 +1,7 @@
 package com.transaction.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,15 +22,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "tb_transaction")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaction {
 	
-    @Id
-    @Column(name = "transaction_id")
+    @Id    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -47,6 +46,6 @@ public class Transaction {
 
     @Column(nullable = false, name = "created_at", updatable = false)
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private Instant createdAt;
     
 }
