@@ -66,7 +66,7 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
-      history.push('/admin/auth');
+      history.push('/login');
     }
     return Promise.reject(error);
   }

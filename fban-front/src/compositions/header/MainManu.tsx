@@ -10,7 +10,7 @@ const MenuConteiner = styled.ul`
   height: 100%;
 `;
 
-function Menu() {
+function MainMenu() {
   return (
     <MenuConteiner>
       <MenuItem text="Home" linkTo="/" />
@@ -20,4 +20,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default MainMenu;

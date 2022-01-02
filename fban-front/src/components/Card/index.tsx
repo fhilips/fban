@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const CardConteiner = styled.li`
-  min-height: 350px;
-  min-width: 350px; 
+  min-height: 370px;
+  min-width: 370px; 
   font-size: 20px;
   line-height: 24px;
   font-weight: 500;  

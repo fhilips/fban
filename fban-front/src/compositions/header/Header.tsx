@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logo from "../../components/Logo";
 import MenuItem from "../../components/MenuItem";
-import Menu from "./Menu";
+import Menu from "./MainManu";
 
 const HeaderContent = styled.header`
   display: flex;
@@ -43,12 +43,16 @@ const Nav = styled.nav`
   }
 `;
 
-function Header() {
+type Props = {
+  children: React.ReactNode;
+}
+
+function Header({ children }: Props) {
   return (
     <HeaderContent>
       <Logo width={150} height={60} />
       <Nav>
-        <Menu />
+        {children}
       </Nav>
       <MenuItem text="Login" linkTo="/login" />
     </HeaderContent>

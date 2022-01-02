@@ -22,6 +22,7 @@ const Main = styled.main`
   h1 { 
     align-self: center;
     font-family: Poppins;
+    margin-bottom: 8px;
   }  
   
   @media (max-width: 560px) {
@@ -29,9 +30,21 @@ const Main = styled.main`
   }
 `;
 
+const InvalidLogin = styled.div`
+  padding: 5px;
+  border: 1px solid ${props => props.theme.colors.white};
+  border-radius: 3px;
+  color: ${props => props.theme.colors.white};  
+  background-color: ${props => props.theme.colors.invalid};
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4.5px );
+  -webkit-backdrop-filter: blur( 4.5px ); 
+  font-size: 15px;
+  opacity: 0.6;
+`;
 
 const FormCadastro = styled.form`
-   min-height: 350px;
+  min-height: 350px;
   min-width: 350px; 
   font-size: 20px;
   line-height: 24px;
@@ -58,15 +71,12 @@ const FormCadastro = styled.form`
 
 `;
 
-type CredentialsDTO = {
-  username: string;
-  password: string;
-};
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordInvalid, setPasswordInvalid] = useState(false);
+  const [loginInvalid, setLoginInvalid] = useState(false);
 
   function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUsername(event.target.value);
@@ -98,19 +108,13 @@ function LoginPage() {
       .then((response) => {
         saveAuthData(response.data);
         console.log(response)
-
+        setLoginInvalid(false);
       })
       .catch((error) => {
         console.log('ERRO', error);
+        setLoginInvalid(true);
       });
 
-    if (!username || !password) {
-      checkValues();
-    } else {
-      setUsername(username);
-      setPassword(password);
-
-    }
   }
 
   return (
@@ -137,6 +141,13 @@ function LoginPage() {
             onChange={handlePasswordChange}
           />
         </FormRow>
+        {loginInvalid &&
+          <InvalidLogin>
+            Email or Password Invalid!
+          </InvalidLogin>
+        }
+
+
         <MainButton text="LOGIN" />
         <span>Forgot your password? <a href="/">Click Here</a></span>
       </FormCadastro>

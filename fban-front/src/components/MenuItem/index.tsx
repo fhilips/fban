@@ -25,13 +25,9 @@ const MenuItemConteiner = styled.li`
   transition: 0.5s;
   opacity: 0.8;
 
-  .selected {
+  .selected {    
     color: ${props => props.theme.colors.white};
-    font-weight: bold;
-  }
-
-  @media (min-width: 40rem) {
-    padding: 1rem 1.5rem;
+    font-weight: bold;    
   }
 
   .span {
@@ -42,7 +38,11 @@ const MenuItemConteiner = styled.li`
   &:hover {
     background-color: ${props => props.theme.colors.secondary};  
     opacity: 1;     
-    border: 1px solid rgba( 255, 255, 255, 0.18 );    
+    border: 0px solid rgba( 255, 255, 255, 0.18 );    
+  }
+
+  @media (min-width: 40rem) {
+    padding: 1rem 1.5rem;
   }
 `;
 
