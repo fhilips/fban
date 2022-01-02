@@ -25,7 +25,7 @@ const MenuItemConteiner = styled.li`
   transition: 0.5s;
   opacity: 0.8;
 
-  .color-red {
+  .selected {
     color: ${props => props.theme.colors.white};
     font-weight: bold;
   }
@@ -41,7 +41,8 @@ const MenuItemConteiner = styled.li`
 
   &:hover {
     background-color: ${props => props.theme.colors.secondary};  
-    opacity: 1;    
+    opacity: 1;     
+    border: 1px solid rgba( 255, 255, 255, 0.18 );    
   }
 `;
 
@@ -56,7 +57,7 @@ function MenuItem({ text, linkTo, target }: Props) {
   return (
     <CustomLink to={linkTo} target={target}>
       <MenuItemConteiner>
-        <span className={target === '_blank' ? 'color-red' : ''}>{text}</span>
+        <span className={target === '_blank' ? 'selected' : ''}>{text}</span>
       </MenuItemConteiner>
     </CustomLink>
   )

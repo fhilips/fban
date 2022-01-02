@@ -23,7 +23,7 @@ const Nav = styled.nav`
   width: 100%;
   height: 100%;  
   min-height: 80px;
-  
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   img {
     margin-left: 2rem;
   }
@@ -50,7 +50,7 @@ function Header() {
       <Nav>
         <Menu />
       </Nav>
-      <MenuItem text="Login" linkTo="/" />
+      <MenuItem text="Login" linkTo="/login" />
     </HeaderContent>
   );
 }

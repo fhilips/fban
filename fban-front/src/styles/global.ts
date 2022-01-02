@@ -6,7 +6,8 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0 !important;
-    font-family: 'Red Hat Display', sans-serif;
+    font-family: 'Red Hat Display', Poppins, sans-serif ;
+    font-weight: 300;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
   }
@@ -16,6 +17,11 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
 
+  a { 
+    text-decoration: none;
+    color: #243743;
+    font-weight: bold;
+  }
   body {
     background: #f2f2f2;
   }

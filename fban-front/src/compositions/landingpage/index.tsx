@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import Wave from "../../assets/wave.svg";
 import Logo from "../../components/Logo";
@@ -38,6 +39,8 @@ const Main = styled.main`
 `;
 
 function LandingPage() {
+
+
   return (
     <Main>
       <Logo width={150} height={63} />
