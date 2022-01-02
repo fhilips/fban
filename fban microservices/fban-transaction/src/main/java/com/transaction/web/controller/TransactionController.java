@@ -1,7 +1,6 @@
 package com.transaction.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,20 +20,20 @@ public class TransactionController implements MessageResponse{
 	private TransactionService service;
 	
 	@PostMapping("deposit")
-    public ResponseEntity<MessageResponse> deposit(@RequestBody TransactionRequest user) {
-        service.deposit(user);
-        return ResponseEntity.created(null).body(createMessageResponse(1l, "Desposito feito com sucesso"));
+    public ResponseEntity<MessageResponse> deposit(@RequestBody TransactionRequest transaction) {
+        service.deposit(transaction);
+        return ResponseEntity.created(null).body(createMessageResponse(1l, "Deposito feito com sucesso"));
     }
 	
 	@PostMapping("withdraw")
-    public ResponseEntity<MessageResponse> withdraw(@RequestBody TransactionRequest user) {
-		service.withdraw(user);
+    public ResponseEntity<MessageResponse> withdraw(@RequestBody TransactionRequest transaction) {
+		service.withdraw(transaction);
         return ResponseEntity.created(null).body(createMessageResponse(1l, "Retirada feita com sucesso"));
     }
 	
 	@PostMapping("transfer")
-    public ResponseEntity<MessageResponse> tranfer(@RequestBody TransactionRequest user) {
-		service.transfer(user);
+    public ResponseEntity<MessageResponse> transfer(@RequestBody TransactionRequest transaction) {
+		service.transfer(transaction);
 		return ResponseEntity.created(null).body(createMessageResponse(1l, "Tranferencia criada com sucesso"));
     }
 

@@ -9,6 +9,8 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 
 INSERT INTO tb_user_details (name, cellphone, user_id) VALUES ('Marcos Soares','1198847646', 1l);
+INSERT INTO tb_user_details (name, cellphone, user_id) VALUES ('Ana Mara','11985416', 2l);
 
-INSERT INTO tb_account (id, agency_number, account_number, account_digit, balance, user_details_id) VALUES (1l, 1l, 1231231l, '1', 2000.10, 1l);
+INSERT INTO tb_account (id, agency_number, account_status, account_number, account_digit, balance, user_details_id) VALUES (1l, 1l, 'ACTIVE', 1231231l, '1', 2000.10, 1l);
+INSERT INTO tb_account (id, agency_number, account_status, account_number, account_digit, balance, user_details_id) VALUES (2l, 1l, 'ACTIVE', 3254813l, '1', 2000.00, 1l);
 
