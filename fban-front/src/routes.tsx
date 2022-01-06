@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CreateUser from './compositions/createuser';
 
 import Header from './compositions/header/Header';
 import MainMenu from './compositions/header/MainManu';
@@ -23,6 +24,7 @@ const RoutesComponent = () => (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/login/recover" element={<Recover />} />
+      <Route path="/signup" element={<CreateUser />} />
     </Routes>
 
   </BrowserRouter>

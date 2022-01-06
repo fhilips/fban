@@ -47,6 +47,35 @@ const Main = styled.main`
   }
 `;
 
+const PhaseContainer = styled.div`
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    .phase-line-separator {
+      width: 40%;
+      border-top: 1px solid  ${(props) => props.theme.colors.primary};
+    }
+`
+
+const PhaseIcon = styled.div`
+  background-color: ${(props) => props.theme.colors.primary};
+  width: 4vh;
+  height: 4vh;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .phase-inside {
+    background-color: ${(props) => props.theme.colors.white};
+    width: 1vh;
+    height: 1vh;
+    border-radius: 50%;
+  }
+`
 const InvalidLogin = styled.div`
   padding: 5px;
   border: 1px solid ${props => props.theme.colors.white};
@@ -60,6 +89,8 @@ const InvalidLogin = styled.div`
   opacity: 0.6;
 `;
 
+
+
 const FormCadastro = styled.form`
   min-height: 350px;
   min-width: 350px; 
@@ -68,7 +99,7 @@ const FormCadastro = styled.form`
   font-weight: 500;  
   color: ${props => props.theme.colors.primary};
   background-color: ${props => props.theme.colors.primary};
- 
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -80,7 +111,7 @@ const FormCadastro = styled.form`
   -webkit-backdrop-filter: blur( 4.5px );  
   border-radius: 5px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
-  border-top: 10px solid ${props => props.theme.colors.primary};
+  border-left: 10px solid ${props => props.theme.colors.primary};
 
   .separator {
     width: 70%;
@@ -90,10 +121,9 @@ const FormCadastro = styled.form`
   @media (min-width: 40rem) {
     padding: 1rem 1.5rem;
   }
+ `;
 
-`;
-
-function LoginPage() {
+function CreateUser() {
   const [username, setUsername] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [password, setPassword] = useState("");
@@ -106,7 +136,6 @@ function LoginPage() {
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value);
   }
-
   function checkUsernameValue() {
     if (!username) {
       setUsernameInvalid(true);
@@ -122,11 +151,8 @@ function LoginPage() {
     }
   }
 
-
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-    const formData = {
-      username, password
-    }
+    const formData = { username, password }
     event.preventDefault();
     requestBackendLogin(formData)
       .then((response) => {
@@ -142,8 +168,19 @@ function LoginPage() {
 
   return (
     <Main>
+      <PhaseContainer>
+        <PhaseIcon>
+          <div className="phase-inside" />
+        </PhaseIcon>
+        <div className="phase-line-separator" />
+        <PhaseIcon>
+          <div className="phase-inside" />
+        </PhaseIcon>
+      </PhaseContainer>
+      Insira seus dados
+      Detalhes do cliente
       <FormCadastro onSubmit={handleFormSubmit}>
-        <h1>Sign in</h1>
+        <h1>Create</h1>
         <FormRow>
           <TextInput
             type="text"
@@ -175,9 +212,9 @@ function LoginPage() {
         <span>Forgot your password? <a href="/">Click Here</a></span>
 
       </FormCadastro>
-      <strong className="new-account">or <a href="/signup">Create new account</a></strong>
+      <strong className="new-account">or <a href="/newuser">Create new account</a></strong>
     </Main >
   );
 }
 
-export default LoginPage;
+export default CreateUser;
