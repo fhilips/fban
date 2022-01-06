@@ -39,6 +39,6 @@ public class TransactionController implements MessageResponse{
 
 	@Override
 	public MessageResponseImpl createMessageResponse(Long id, String text) {		
-		return new MessageResponseImpl(text + " " + id); 
+		return new MessageResponseImpl(text + ": " + id); 
 	}
 }

@@ -78,8 +78,7 @@ public class AccountServiceImpl implements AccountService {
 		
 	}
 	
-	private void isAccountStatusInactive(AccountStatus status) {
-		System.out.println(status);
+	private void isAccountStatusInactive(AccountStatus status) {		
 		if(status.equals(AccountStatus.INACTIVE)) {
 			throw new Error("Account is inactive");
 		}		

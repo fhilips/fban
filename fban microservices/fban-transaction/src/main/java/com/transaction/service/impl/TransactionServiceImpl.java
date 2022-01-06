@@ -23,46 +23,46 @@ public class TransactionServiceImpl implements TransactionService {
 	private AccountFeignClient accFeignClient;
 	
 	@Override
-	public Transaction deposit(TransactionRequest transactionRequest) {
-		accFeignClient.findById(transactionRequest.getOriginAccount()).getBody();	
-		accFeignClient.deposit(transactionRequest);	
+	public Transaction deposit(TransactionRequest deposit) {
+		accFeignClient.findById(deposit.getOriginAccount()).getBody();	
+		accFeignClient.deposit(deposit);	
 		
 		Transaction transaction = Transaction.builder()
 											 .type(TransactionType.DEPOSIT)
-								             .amount(transactionRequest.getAmount())
+								             .amount(deposit.getAmount())
 								             .createdAt(Instant.now())
-								             .destinationAccount(transactionRequest.getDestinationAccount())
-								             .originAccount(transactionRequest.getOriginAccount())
+								             .destinationAccount(deposit.getDestinationAccount())
+								             .originAccount(deposit.getOriginAccount())
 								             .build();
 		return repository.save(transaction);
 	}
 
 	@Override
-	public Transaction withdraw(TransactionRequest transactionRequest) {		
-		accFeignClient.findById(transactionRequest.getOriginAccount()).getBody();	
-		accFeignClient.withdraw(transactionRequest);	
+	public Transaction withdraw(TransactionRequest withdraw) {		
+		accFeignClient.findById(withdraw.getOriginAccount()).getBody();	
+		accFeignClient.withdraw(withdraw);	
 		Transaction transaction = Transaction.builder()
 								 .type(TransactionType.WITHDRAW)
-					             .amount(transactionRequest.getAmount())
+					             .amount(withdraw.getAmount())
 					             .createdAt(Instant.now())
-					             .destinationAccount(transactionRequest.getDestinationAccount())
-					             .originAccount(transactionRequest.getOriginAccount())
+					             .destinationAccount(withdraw.getDestinationAccount())
+					             .originAccount(withdraw.getOriginAccount())
 					             .build();
 		return repository.save(transaction);
 	}
 
 	@Override
-	public Transaction transfer(TransactionRequest transactionRequest) {
-		accFeignClient.findById(transactionRequest.getOriginAccount()).getBody();	
-		accFeignClient.findById(transactionRequest.getDestinationAccount()).getBody();	
-		accFeignClient.transfer(transactionRequest);	
+	public Transaction transfer(TransactionRequest transfer) {
+		accFeignClient.findById(transfer.getOriginAccount()).getBody();	
+		accFeignClient.findById(transfer.getDestinationAccount()).getBody();	
+		accFeignClient.transfer(transfer);	
 
 		Transaction transaction = Transaction.builder()
 								 .type(TransactionType.TRANSFER)
-					             .amount(transactionRequest.getAmount())
+					             .amount(transfer.getAmount())
 					             .createdAt(Instant.now())
-					             .destinationAccount(transactionRequest.getDestinationAccount())
-					             .originAccount(transactionRequest.getOriginAccount())
+					             .destinationAccount(transfer.getDestinationAccount())
+					             .originAccount(transfer.getOriginAccount())
 					             .build();
 		return repository.save(transaction);
 		

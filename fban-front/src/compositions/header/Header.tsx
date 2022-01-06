@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Logo from "../../components/Logo";
 import MenuItem from "../../components/MenuItem";
-import Menu from "./MainManu";
 
 const HeaderContent = styled.header`
   display: flex;

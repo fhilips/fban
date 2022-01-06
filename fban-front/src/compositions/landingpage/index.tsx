@@ -15,16 +15,21 @@ const Main = styled.main`
   background-repeat: no-repeat;
   background-position: bottom center;
 
+
   .home-title {
     font-family: Poppins;
     font-weight: 300;
-    margin-bottom: 30px;
+    margin-bottom: 30px;    
   }
 
   .home-text {
     text-align: center;
     font-family: Poppins;
     font-size: 18px;
+    padding: 15px;
+    border-radius: 8px;    
+    background: ${(props) => props.theme.colors.white};
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   }
 
   .home-text a {
@@ -47,8 +52,9 @@ function LandingPage() {
       <h1 className="home-title">Bem Vindos a nossa Página!</h1>
       <span className="home-text">
         Gerencie sua conta de forma simplicada com nossos serviços <br />
-        Não possui conta? <a href="">Cadastre-se já</a>
+        Não possui conta? <a href="/">Cadastre-se já</a>
       </span>
+
     </Main>
   );
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Wave from "../../assets/wave.svg";
-import { CardConteiner } from "../../components/Card";
 import { FormRow, TextInput } from "../../components/Forms/FormContent";
 import MainButton from "../../components/MainButton";
 import { requestBackendLogin } from "../../services/requests";
