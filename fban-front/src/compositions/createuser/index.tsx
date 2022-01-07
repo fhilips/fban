@@ -5,6 +5,7 @@ import { FormRow, TextInput } from "../../components/Forms/FormContent";
 import MainButton from "../../components/MainButton";
 import { requestBackendLogin } from "../../services/requests";
 import { saveAuthData } from "../../services/storage";
+import PhaseUserCreate from "./PhaseUserCreate";
 
 const Main = styled.main`
   display: flex;
@@ -47,35 +48,6 @@ const Main = styled.main`
   }
 `;
 
-const PhaseContainer = styled.div`
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
-
-    .phase-line-separator {
-      width: 40%;
-      border-top: 1px solid  ${(props) => props.theme.colors.primary};
-    }
-`
-
-const PhaseIcon = styled.div`
-  background-color: ${(props) => props.theme.colors.primary};
-  width: 4vh;
-  height: 4vh;
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .phase-inside {
-    background-color: ${(props) => props.theme.colors.white};
-    width: 1vh;
-    height: 1vh;
-    border-radius: 50%;
-  }
-`
 const InvalidLogin = styled.div`
   padding: 5px;
   border: 1px solid ${props => props.theme.colors.white};
@@ -88,8 +60,6 @@ const InvalidLogin = styled.div`
   font-size: 15px;
   opacity: 0.6;
 `;
-
-
 
 const FormCadastro = styled.form`
   min-height: 350px;
@@ -123,7 +93,13 @@ const FormCadastro = styled.form`
   }
  `;
 
+export enum Phase {
+  userCredencials,
+  userDetails
+}
+
 function CreateUser() {
+  const [phaseSelected, setPhaseSelected] = useState<Phase>(Phase.userCredencials);
   const [username, setUsername] = useState("");
   const [usernameInvalid, setUsernameInvalid] = useState(false);
   const [password, setPassword] = useState("");
@@ -168,20 +144,11 @@ function CreateUser() {
 
   return (
     <Main>
-      <PhaseContainer>
-        <PhaseIcon>
-          <div className="phase-inside" />
-        </PhaseIcon>
-        <div className="phase-line-separator" />
-        <PhaseIcon>
-          <div className="phase-inside" />
-        </PhaseIcon>
-      </PhaseContainer>
-      Insira seus dados
-      Detalhes do cliente
+      <PhaseUserCreate phaseSelected={phaseSelected} />
       <FormCadastro onSubmit={handleFormSubmit}>
         <h1>Create</h1>
         <FormRow>
+
           <TextInput
             type="text"
             id="input-nome"

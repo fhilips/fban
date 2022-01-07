@@ -14,12 +14,12 @@ export const Button = styled.button`
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4.5px );
     -webkit-backdrop-filter: blur( 4.5px );    
-
 `;
 
 type Props = {
   text: string;
 }
+
 function MainButton({ text }: Props) {
   return (
     <Button type="submit">
