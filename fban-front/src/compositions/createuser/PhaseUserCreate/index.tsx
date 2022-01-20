@@ -81,10 +81,10 @@ function PhaseUserCreate({ phaseSelected }: Props) {
       </div>
 
       <div className={phaseSelected === Phase.userCredencials ? 'phase-text text-selected' : 'phase-text'} >
-        Insira seus dados
+        Insert your credencials
       </div>
       <div className={phaseSelected === Phase.userDetails ? 'phase-text text-selected' : 'phase-text'}>
-        Detalhes do cliente
+        Insert your details
       </div>
     </PhaseContainer>
   );

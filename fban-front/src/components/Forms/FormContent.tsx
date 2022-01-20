@@ -9,10 +9,11 @@ export const FormRow = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 18px;
+  font-size: 16px;
   color: ${(props) => props.theme.colors.primary};
   font-weight: 400;
   line-height: 1.6;
+  margin: 5px 0 3px 0;
 `;
 
 export const TextInput = styled.input`
@@ -24,7 +25,7 @@ export const TextInput = styled.input`
   -webkit-box-flex: 1;
   flex-grow: 1;
   width: 100%;
-  padding: 12px 8px; 
+  padding: 12px 8px;  
 
   &.invalid {
     border: 1px solid ${(props) => props.theme.colors.invalid};

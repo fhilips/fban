@@ -1,33 +1,30 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Wave from "../../assets/wave.svg";
-import { FormRow, TextInput } from "../../components/Forms/FormContent";
+import { FormRow, Label, TextInput } from "../../components/Forms/FormContent";
 import MainButton from "../../components/MainButton";
 import { requestBackendLogin } from "../../services/requests";
 import { saveAuthData } from "../../services/storage";
 import PhaseUserCreate from "./PhaseUserCreate";
 
 const Main = styled.main`
+  
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  height: 100%; 
   justify-content: center;
   background-color: ${(props) => props.theme.colors.white};
   background-image: url(${Wave});
   background-repeat: no-repeat;
   background-position: bottom center;
-
+ 
   h1 { 
     align-self: center;
     font-family: Poppins;
     margin-bottom: 8px;
   }  
   
-  @media (max-width: 560px) {
-    padding-top: 102px;
-  }
-
   .new-account {
     margin-top: 30px;
     font-size: 1.3rem;
@@ -61,9 +58,9 @@ const InvalidLogin = styled.div`
   opacity: 0.6;
 `;
 
-const FormCadastro = styled.form`
+const FormCadastro = styled.form` 
   min-height: 350px;
-  min-width: 350px; 
+  min-width: 500px; 
   font-size: 20px;
   line-height: 24px;
   font-weight: 500;  
@@ -72,7 +69,6 @@ const FormCadastro = styled.form`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   transition: 0.5s;  
 
   background: rgba( 255, 255, 255, 0.2 );
@@ -82,14 +78,13 @@ const FormCadastro = styled.form`
   border-radius: 5px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   border-left: 10px solid ${props => props.theme.colors.primary};
-
-  .separator {
-    width: 70%;
-    align-self: center;
-    border-top: 1px solid ${props => props.theme.primary};
-  }
+  gap: 5px;  
   @media (min-width: 40rem) {
     padding: 1rem 1.5rem;
+  }
+
+  #input-password {
+    margin-bottom: 20px;
   }
  `;
 
@@ -126,9 +121,14 @@ function CreateUser() {
       setPasswordInvalid(false);
     }
   }
+  function checkValues() {
+    checkPasswordValue();
+    checkUsernameValue();
+  }
 
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     const formData = { username, password }
+    checkValues();
     event.preventDefault();
     requestBackendLogin(formData)
       .then((response) => {
@@ -142,44 +142,138 @@ function CreateUser() {
       });
   }
 
+  function switchPhase(event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLSpanElement>) {
+    event.preventDefault();
+    if (phaseSelected === Phase.userCredencials) {
+      setPhaseSelected(Phase.userDetails);
+    } else {
+      setPhaseSelected(Phase.userCredencials);
+    }
+  }
+
   return (
     <Main>
       <PhaseUserCreate phaseSelected={phaseSelected} />
-      <FormCadastro onSubmit={handleFormSubmit}>
-        <h1>Create</h1>
-        <FormRow>
+      <FormCadastro onSubmit={phaseSelected === Phase.userCredencials ? switchPhase : handleFormSubmit}>
+        <h1>New Account</h1>
+        {phaseSelected === Phase.userCredencials ?
+          <>
+            <FormRow>
+              <Label htmlFor="input-nome">
+                Username
+              </Label>
+              <TextInput
+                type="text"
+                id="input-nome"
+                placeholder="type your username"
+                className={usernameInvalid ? 'invalid' : ''}
+                onBlur={checkUsernameValue}
+                onChange={handleUsernameChange}
+              />
+            </FormRow>
+            <FormRow>
+              <Label htmlFor="input-email">
+                Email
+              </Label>
+              <TextInput
+                type="email"
+                id="input-email"
+                placeholder="email@email.com"
+                className={usernameInvalid ? 'invalid' : ''}
+                onBlur={checkUsernameValue}
+                onChange={handleUsernameChange}
+              />
+            </FormRow>
+            <FormRow>
+              <Label htmlFor="input-password">
+                Password
+              </Label>
+              <TextInput
+                type="password"
+                id="input-password"
+                className={passwordInvalid ? 'invalid' : ''}
+                placeholder="Password"
+                onBlur={checkPasswordValue}
+                onChange={handlePasswordChange}
+              />
+            </FormRow>
+            {loginInvalid &&
+              <InvalidLogin>
+                Email or Password Invalid!
+              </InvalidLogin>
+            }
+          </> :
+          <>
+            <FormRow>
+              <Label htmlFor="input-fullname">
+                Full Name
+              </Label>
+              <TextInput
+                type="text"
+                id="input-fullname"
+                placeholder="type your full name"
+                className={usernameInvalid ? 'invalid' : ''}
+                onBlur={checkUsernameValue}
+                onChange={handleUsernameChange}
+              />
+            </FormRow>
 
-          <TextInput
-            type="text"
-            id="input-nome"
-            placeholder="Email or Username"
-            className={usernameInvalid ? 'invalid' : ''}
-            onBlur={checkUsernameValue}
-            onChange={handleUsernameChange}
-          />
-        </FormRow>
-        <FormRow>
-          <TextInput
-            type="password"
-            id="input-nome"
-            className={passwordInvalid ? 'invalid' : ''}
-            placeholder="Password"
-            onBlur={checkPasswordValue}
-            onChange={handlePasswordChange}
-          />
-        </FormRow>
-        {loginInvalid &&
-          <InvalidLogin>
-            Email or Password Invalid!
-          </InvalidLogin>
+            <FormRow>
+              <Label htmlFor="input-birth-date">
+                Birth Date
+              </Label>
+              <TextInput
+                type="text"
+                id="input-birth-date"
+                placeholder="dd/mm/yyyy"
+                className={usernameInvalid ? 'invalid' : ''}
+                onBlur={checkUsernameValue}
+                onChange={handleUsernameChange}
+              />
+            </FormRow>
+
+            <FormRow>
+              <Label htmlFor="input-birth-date">
+                Birth Date
+              </Label>
+              <TextInput
+                type="text"
+                id="input-birth-date"
+                placeholder="dd/mm/yyyy"
+                className={usernameInvalid ? 'invalid' : ''}
+                onBlur={checkUsernameValue}
+                onChange={handleUsernameChange}
+              />
+            </FormRow>
+            <FormRow>
+              <Label htmlFor="input-password">
+                Password
+              </Label>
+              <TextInput
+                type="password"
+                id="input-password"
+                className={passwordInvalid ? 'invalid' : ''}
+                placeholder="Password"
+                onBlur={checkPasswordValue}
+                onChange={handlePasswordChange}
+              />
+            </FormRow>
+
+
+            {loginInvalid &&
+              <InvalidLogin>
+                Email or Password Invalid!
+              </InvalidLogin>
+            }
+          </>
         }
-
-        <MainButton text="LOGIN" />
-        <div className="separator" />
-        <span>Forgot your password? <a href="/">Click Here</a></span>
+        {phaseSelected === Phase.userDetails &&
+          <span onClick={switchPhase}>Review Credentials</span>
+        }
+        <MainButton text={phaseSelected === Phase.userCredencials ? 'NEXT' : "CREATE NEW USER"} />
 
       </FormCadastro>
-      <strong className="new-account">or <a href="/newuser">Create new account</a></strong>
+
     </Main >
   );
 }
